@@ -1,0 +1,27 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitlab-webservice-https-ingressroute
+  namespace: gitlab
+spec:
+  entrypoint:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`gitlab.dev.example.com`) && PathPrefix(`/admin/sidekiq`)
+      services:
+        - kind: Service
+          name: gitlab-webservice-default
+          port: 8080
+    - kind: Rule
+      match: Host(`gitlab.dev.example.com`) && PathPrefix(`/`)
+      services:
+        - kind: Service
+          name: gitlab-webservice-default
+          port: 8181
+  tls:
+    secretName: tls-cert
+    option:
+      - namespace: gitlab
+    domain:
+      - main: dev.example.com

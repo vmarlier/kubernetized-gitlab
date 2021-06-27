@@ -1,0 +1,13 @@
+# Documentation:
+# https://docs.gitlab.com/charts/advanced/external-object-storage/#backups-storage-example
+# https://www.scaleway.com/en/docs/object-storage-with-s3cmd/
+[default]
+signature = s3v4
+# Object Storage Region FR-PAR
+bucket_location = ${bucket_region}
+host_base = https://s3.${bucket_region}.scw.cloud
+host_bucket = https://s3.${bucket_region}.scw.cloud
+
+# Login credentials
+access_key = ${scw_access_key} 
+secret_key = ${scw_secret_key}

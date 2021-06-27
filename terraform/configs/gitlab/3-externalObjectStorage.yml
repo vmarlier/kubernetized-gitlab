@@ -1,0 +1,53 @@
+# This file provide the configurations for external object storage for the docker registry, the gitlab backups and the others services like lfs, terraform state files, artifacts...
+# Docs:
+# https://gitlab.com/gitlab-org/charts/gitlab/blob/master/examples/values-external-objectstorage.yaml
+# https://docs.gitlab.com/charts/advanced/external-object-storage/
+global:
+  minio:
+    enabled: false
+  registry:
+    bucket: ${bucket_registry}
+  appConfig:
+    object_store:
+      enabled: true
+      proxy_download: true
+      storage_options: {}
+      connection:
+        secret: gitlab-rails-storage-config
+        key: connection
+    lfs:
+      bucket: ${bucket_gitlfs}
+    artifacts:
+      bucket: ${bucket_artifacts}
+    uploads:
+      bucket: ${bucket_uploads}
+    packages:
+      bucket: ${bucket_packages}
+    externalDiffs:
+      bucket: ${bucket_externaldiffs}
+    terraformState:
+      bucket: ${bucket_terraformstate}
+    dependencyProxy:
+      bucket: ${bucket_dependencyproxy}
+    backups:
+      objectStorage:
+        backend: s3
+      bucket: ${bucket_backups}
+      tmpBucket: ${bucket_tmpbackups}
+gitlab:
+  task-runner:
+    backups:
+      objectStorage:
+        config:
+          secret: gitlab-backup-storage-config
+          key: connection
+registry:
+  debug:
+    addr:
+      port: 5001
+    prometheus:
+      enabled: true
+      path: "/metrics"
+  storage:
+    secret: gitlab-registry-storage-config
+    key: connection

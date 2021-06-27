@@ -1,0 +1,16 @@
+# disable in-chart PostgreSQL
+postgresql:
+  install: false
+# Configure External PostgreSQL
+global:
+  psql:
+    host: ${postgresql_host}
+    port: ${postgresql_port}
+    database: ${postgresql_database}
+    username: ${postgresql_user}
+    password:
+      secret: gitlab-pgql-password
+      key: gitlab-pgql-password
+      #ssl:
+      #secret: gitlab-pgql-certificate
+      #clientCertificate: cert

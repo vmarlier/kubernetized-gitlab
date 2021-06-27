@@ -1,0 +1,21 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gitlab-registry-https-ingressroute
+  namespace: gitlab
+spec:
+  entrypoint:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`registry.example.com`)
+      services:
+        - kind: Service
+          name: gitlab-registry
+          port: 5000
+  tls:
+    secretName: tls-cert
+    option:
+      - namespace: gitlab
+    domain:
+      - main: example.com

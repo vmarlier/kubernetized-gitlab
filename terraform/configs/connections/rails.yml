@@ -1,0 +1,12 @@
+# Configuration of `connection` secret for Rails
+# Source: https://docs.gitlab.com/ee/administration/object_storage.html#s3-compatible-connection-settings
+# Source: https://www.scaleway.com/en/docs/object-storage-feature/#-Object-Storage-Use-Cases
+#
+# Always AWS for S3-compatible storage
+provider: AWS
+aws_access_key_id: ${scw_access_key} 
+aws_secret_access_key: ${scw_secret_key}
+aws_signature_version: 4
+region: ${bucket_region}
+host: "https://s3.${bucket_region}.scw.cloud"
+endpoint: "https://s3.${bucket_region}.scw.cloud"

@@ -1,0 +1,68 @@
+global:
+  # Latest gitlab version
+  gitlabVersion: ${gitlab_version}
+
+  hosts:
+    domain: example.com
+    https: true
+    gitlab:
+      name: gitlab.example.com
+      https: true
+    registry:
+      name: registry.example.com
+      https: true
+  grafana:
+    enabled: false
+  ingress:
+    configureCertmanager: false
+    tls:
+      secretName: gitlab-cert
+  email:
+    display_name: "Gitlab"
+    from: "gitlab@kub-cleaner.com"
+    reply_to: "noreply@kub-cleaner.com"
+  smtp:
+    enabled: true
+    address: ${smtp_address}
+    port: ${smtp_port}
+    user_name: ${smtp_username}
+    password:
+      secret: ${smtp_password_secret}
+      key: "password"
+    domain: ${smtp_domain}
+    authentication: "login"
+    starttls_auto: true
+    openssl_verify_mode: "none"
+
+gitlab:
+  task-runner:
+    backups:
+      cron:
+        enabled: ${cron_enabled}
+        schedule: 30 2 * * *
+  webservice:
+    workerProcesses: ${worker_processes}
+    resources:
+      requests:
+        memory: ${memory_request} # 2.5G = 2 * 1.25G
+      limits:
+        memory: ${memory_limits} # 3G = 2 * 1.5G
+  sidekiq:
+    enabled: true
+    metrics:
+      enabled: true
+
+prometheus:
+  install: false
+
+# Don't install runner with this Helm
+gitlab-runner:
+  install: false
+
+# Ingress
+nginx-ingress:
+  enabled: false
+
+# Configure certmanager
+certmanager:
+  install: false
