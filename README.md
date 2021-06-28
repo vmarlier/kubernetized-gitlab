@@ -7,6 +7,7 @@ kubernetized-gitlab create the infrastructure onto scaleway and the k8s needed b
 * [Setup](#setup-terraform)
 * [How to use](#how-to-use-terraform)
 * [How to Commit](#how-to-commit)
+* [Related Project](#related-project)
 
 ### Prerequisites
 | Technologies | Versions |
@@ -79,3 +80,10 @@ You can combine status
 ```
 git commit -m "[WIP/BUG] still working on callLambda() bug"
 ```
+
+### Related Project
+
+[Infrastructure socle](https://github.com/vmarlier/scaleway-kubernetes-landingzone)
+[Bookstack](https://github.com/vmarlier/kubernetized-bookstack)
+[Monitoring](https://github.com/vmarlier/kubernetized-Grafana-Prometheus-Thanos)
+
